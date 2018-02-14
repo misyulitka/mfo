@@ -1,0 +1,6 @@
+WITH
+passport_fields AS
+ (SELECT * FROM doc_types,doc_fields,field_values,document WHERE doc_fields.id = field_values.field_id AND doc_types.id = doc_fields.doctype_id AND doc_types.id = document.doctype_id)
+
+SELECT clients.surname, clients.name, clients.patronimic, contacts.phone_number, credits.credit_number, passport_fields.type_name, passport_fields.field_name, passport_fields.field_value FROM clients, contacts, credits, passport_fields WHERE clients.id = contacts.client_id AND clients.id = credits.client_id AND clients.id = passport_fields.client_id;
+
